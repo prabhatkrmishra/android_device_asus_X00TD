@@ -41,3 +41,18 @@ PRODUCT_PACKAGES += \
 
 # Inherit the proprietary files
 $(call inherit-product, vendor/asus/X00TD/X00TD-vendor.mk)
+
+# Go-style memory savings, without low-RAM mode
+# ro.config.low_ram stays unset - framework keeps full behavior
+PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
+MALLOC_LOW_MEMORY := true
+
+# Always preopt extracted APKs to prevent extracting out of the APK.
+PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK := true
+
+# Dedupe VNDK libraries with identical core variants.
+TARGET_VNDK_USE_CORE_VARIANT := true
+
+# Cap MADV_WILLNEED readahead on odex/vdex to 30MB (down from the 100MB
+# default) to alleviate pagecache pressure. Advisory prefetch only.
+PRODUCT_PROPERTY_OVERRIDES +=     dalvik.vm.madvise.vdexfile.size=31457280     dalvik.vm.madvise.odexfile.size=31457280
