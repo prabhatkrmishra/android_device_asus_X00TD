@@ -23,7 +23,8 @@ TARGET_KERNEL_CONFIG := \
     vendor/sdm660-perf_defconfig \
     vendor/common.config \
     vendor/debugfs.config \
-    vendor/X00TD.config
+    vendor/X00TD.config \
+    vendor/chroot.config
 
 # Inherit the proprietary files
 include vendor/asus/X00TD/BoardConfigVendor.mk
